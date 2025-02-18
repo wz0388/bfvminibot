@@ -2,7 +2,7 @@ from flask import Flask, request
 import requests
 import logging
 CQHTTP_URL = 'http://127.0.0.1:8003'
-TVbotcx = {}
+
 def handle_message(event):
     data = request.json
     user_id = event['user_id']
@@ -11,13 +11,10 @@ def handle_message(event):
     message = data.get('message')
     #print(f"获取到的消息: {message}")
     if message.strip().startswith("/pl"):
-        target_user_id = int(message.split()[1])
-        TVbotcx[user_id]['status'] == 'waiting_for_TVbot'
-        TVbotcx[user_id]['message_id'] == message_id
-        TVbotcx[user_id]['group_id'] == group_id
+        target_user_id = str(message.split()[1])
         send_group_message(935114950, f"[CQ:at,qq=3889013937] /playerlist {target_user_id}")
     
-    elif 'CQ:image' in message and user_id == 3889013937:
+    elif 'CQ:image' in message and user_id == 3889013937 and group_id == 935114950:
         name_start = message.find('file=') + 5
         name_end = message.find(',', name_start)
         file_temp_name = message[name_start:name_end]
